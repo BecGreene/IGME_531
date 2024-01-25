@@ -2,22 +2,23 @@ function assignment_01_toolbox_v1
 
 % Replication of Sainte-Victoire
 
-%{%}
+%{
 createRectangle(4, 4, 18, 18, 23, 40, 40, 23, 1, '#3B100E', true, false, 30);
 createRectangle(16, 16, 24, 24, 10, 21, 21, 10, 1, '#3B100E', true, false, 30);
 createRectangle(15, 15, 23, 23, 20, 35, 35, 20, 1, '#A2142F', true, false, 10);
-createRectangle(0, 0, 10, 10, 0, 20, 20, 0, 1, '#A2142F', true, false, 15);
+createRectangle(0, 0, 10, 10, 0, 20, 20, 0, 1, '#A2142F', true, true, 15);
 createRectangle(18, 18, 25, 25, -1, 13, 13, -1, 1, '#A2142F', true, false, 45);
 createRectangle(2, 2, 12, 12, 15, 30, 30, 15, 1, '#FF0000', true, false, 45);
 createRectangle(18, 18, 28, 28, 15, 30, 30, 15, 1, '#FF0000', true, false, 20);
 createRectangle(21, 21, 27, 27, -10, 1, 1, -10, 1, '#FF0000', true, false, 15);
+%}
 
 % Variation of Sainte-Victoire
-%{
+%{%}
 createCircle(1, 5, 2, 1, '#0072BD', true);
 createCircle(3, 8, 2, 1, '#4DBEEE', true);
 createCircle(2, 6, 2, 1, '#0000FF', true);
-%}
+
 
 fig = gcf;
 print(fig,'assignment_01_toolbox_replication.svg','-dsvg');
@@ -140,12 +141,15 @@ end
     - rot_angle: angle of rotation
 %}
 function createRectangle(x_bl, x_tl, x_tr, x_br, y_bl, y_tl, y_tr, y_br, stroke_width, stroke_color, isFilled, isRotated, rot_angle)
+    
     if (isFilled)
 
         stroke_width = 1;
 
         center_width = (x_bl + x_br) / 2;
         center_height = (y_bl + y_tl) / 2;
+
+        % centroid
 
         new_x_bl = x_bl;
         new_y_bl = y_bl;
