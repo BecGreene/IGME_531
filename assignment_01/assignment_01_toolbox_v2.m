@@ -1,27 +1,48 @@
-function assignment_01_toolbox_v1
+function assignment_01_toolbox_v2
 
-% Replication of Sainte-Victoire
+% Recreation of (Des)Orderes
+%{%}
+for row = 1:10
+    for col = 1:10
 
+        createRectangle(row-1, row-1, row, row, ...
+                        col, col-1, col-1, col, 1, 'k', false, false, 0);
+        hold on;
+
+        for randCount = 1:10
+
+            randNum = random('Normal', 0.1, 0.09);
+            createRectangle((row-1)+randNum, (row-1)+randNum, row-randNum, row-randNum, ...
+                             col-randNum, (col-1)+randNum, (col-1)+randNum, col-randNum, 1, 'k', false, false, 0);
+            hold on;
+
+        end
+    end
+end
+
+
+% Variation of (Des)Orderes
 %{
-createRectangle(4, 4, 18, 18, 23, 40, 40, 23, 1, '#3B100E', true, false, 30);
-createRectangle(16, 16, 24, 24, 10, 21, 21, 10, 1, '#3B100E', true, false, 30);
-createRectangle(15, 15, 23, 23, 20, 35, 35, 20, 1, '#A2142F', true, false, 10);
-createRectangle(0, 0, 10, 10, 0, 20, 20, 0, 1, '#A2142F', true, true, 15);
-createRectangle(18, 18, 25, 25, -1, 13, 13, -1, 1, '#A2142F', true, false, 45);
-createRectangle(2, 2, 12, 12, 15, 30, 30, 15, 1, '#FF0000', true, false, 45);
-createRectangle(18, 18, 28, 28, 15, 30, 30, 15, 1, '#FF0000', true, false, 20);
-createRectangle(21, 21, 27, 27, -10, 1, 1, -10, 1, '#FF0000', true, false, 15);
-%}
+for row = 1:10
+    for col = 1:10
 
-% Variation of Sainte-Victoire
-%{
-createCircle(1, 5, 2, 1, '#0072BD', true);
-createCircle(3, 8, 2, 1, '#4DBEEE', true);
-createCircle(2, 6, 2, 1, '#0000FF', true);
+        createCircle(row, col, 1, 1, 'r', false);
+        hold on;
+
+        for randCount = 1:3
+
+            randNum = random('Normal', 0.1, 0.09);
+
+            createCircle(row, col, 1-randNum, 1, 'r', false);
+            hold on;
+
+        end
+    end
+end
 %}
 
 fig = gcf;
-print(fig,'assignment_01_toolbox_replication.svg','-dsvg');
+print(fig,'assignment_01_toolbox_replication_v2.svg','-dsvg');
 
 end
 
@@ -34,7 +55,7 @@ end
     - stroke_color: color of stroke / fill
     - isFilled: determines if shape is filled or outlined
 %}
-function createCircle(x_value, y_value, radius, stroke_width, stroke_color, isFilled)
+function createCircle(x, y, radius, stroke_width, stroke_color, isFilled)
 
     if (isFilled)
 
@@ -43,14 +64,14 @@ function createCircle(x_value, y_value, radius, stroke_width, stroke_color, isFi
 
         while (new_radius >= 0)
 
-            viscircles([x_value y_value], new_radius, 'LineWidth', stroke_width, 'Color', stroke_color);
+            viscircles([x y], new_radius, 'LineWidth', stroke_width, 'Color', stroke_color);
             new_radius = new_radius - 0.03;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 
         end
 
     else
 
-        viscircles([x_value y_value],radius,'LineWidth', stroke_width, 'Color',stroke_color);
+        viscircles([x y],radius,'LineWidth', stroke_width, 'Color',stroke_color);
 
     end
 
@@ -94,6 +115,7 @@ function createEllipse(xl, yl, xr, yr, howStretched, howSmooth, stroke_width, st
             t = linspace(0, 2 * pi, howSmooth); % Absolute angle parameter
             X = a * cos(t);
             Y = b * sin(t);
+
             % Compute angles relative to (x1, y1).
             angles = atan2(new_yr - new_yl, new_xr - new_xl);
             x = (new_xl + new_xr) / 2 + X * cos(angles) - Y * sin(angles);
@@ -130,17 +152,22 @@ end
 
 % ~ RECTANGLE ~ 
 %{
-    - x_start: bottom left x coordinate
-    - y_start: bottom left y coordinate
-    - x_size: width
-    - y_size: height
+    - x_tl: top left x coordinate
+    - x_bl: bottom left x coordinate
+    - x_br: bottom right x coordinate
+    - x_tr: top right x coordinate
+    - y_tl: top left y coordinate
+    - y_bl: bottom left y coordinate
+    - y_br: bottom right y coordinate
+    - y_tr: top right y coordinate
     - stroke_width: size of stroke (does not matter if shape is filled)
     - stroke_color: color of stroke / fill
     - isFilled: determines if shape is filled or outlined
     - isRotated: determines if shape is rotated
-    - rot_angle: angle of rotation
+    - rot_angle: angle of rotation (number does not matter if rotation is
+        false)
 %}
-function createRectangle(x_bl, x_tl, x_tr, x_br, y_bl, y_tl, y_tr, y_br, stroke_width, stroke_color, isFilled, isRotated, rot_angle)
+function createRectangle(x_tl, x_bl, x_br, x_tr, y_tl, y_bl, y_br, y_tr, stroke_width, stroke_color, isFilled, isRotated, rot_angle)
     
     if (isFilled)
 
@@ -164,11 +191,15 @@ function createRectangle(x_bl, x_tl, x_tr, x_br, y_bl, y_tl, y_tr, y_br, stroke_
 
             if (isRotated)
 
-                plot(rotate(polyshape([new_x_bl new_x_tl new_x_tr new_x_br],[ new_y_bl new_y_tl new_y_tr new_y_br]), rot_angle),'LineWidth', stroke_width, 'EdgeColor', stroke_color, 'FaceColor', 'none');
+                plot(rotate(polyshape([new_x_tl new_x_bl new_x_br new_x_tr], ...
+                                      [new_y_tl new_y_bl new_y_br new_y_tr]), ...
+                                      rot_angle), 'LineWidth', stroke_width, 'EdgeColor', stroke_color, 'FaceColor', 'none');
 
             else
 
-                plot(polyshape([new_x_bl new_x_tl new_x_tr new_x_br],[ new_y_bl new_y_tl new_y_tr new_y_br]), 'LineWidth', stroke_width, 'EdgeColor', stroke_color, 'FaceColor', 'none');
+                plot(polyshape([new_x_tl new_x_bl new_x_br new_x_tr], ...
+                               [new_y_tl new_y_bl new_y_br new_y_tr]), ...
+                               'LineWidth', stroke_width, 'EdgeColor', stroke_color, 'FaceColor', 'none');
             
             end
 
@@ -187,11 +218,14 @@ function createRectangle(x_bl, x_tl, x_tr, x_br, y_bl, y_tl, y_tr, y_br, stroke_
     else
             if (isRotated)
 
-                plot(rotate(polyshape([x_bl x_tl x_tr x_br],[ y_bl y_tl y_tr y_br]), rot_angle),'LineWidth', stroke_width, 'EdgeColor', stroke_color, 'FaceColor', 'none');
+                plot(rotate(polyshape([x_tl x_bl x_br x_tr], ...
+                                      [y_tl y_bl y_br y_tr]), rot_angle),'LineWidth', stroke_width, 'EdgeColor', stroke_color, 'FaceColor', 'none');
 
             else
 
-                plot(polyshape([x_bl x_tl x_tr x_br],[ y_bl y_tl y_tr y_br]), 'LineWidth', stroke_width, 'EdgeColor', stroke_color, 'FaceColor', 'none');
+                plot(polyshape([x_tl x_bl x_br x_tr], ...
+                               [y_tl y_bl y_br y_tr]), ...
+                               'LineWidth', stroke_width, 'EdgeColor', stroke_color, 'FaceColor', 'none');
             
             end
     end
@@ -231,13 +265,38 @@ end
 
 % ~ STRAIGHT LINE ~ 
 %{
-    - x_start: x coordinate (start and end)
-    - y_start: y coordinate (start and end)
+    - x: x coordinate (start and end)
+    - y: y coordinate (start and end)
     - stroke_width: size of stroke
     - stroke_color: color of stroke
 %}
-function createStraightLine(x_value, y_value, stroke_width, stroke_color)
+function createStraightLine(x, y, stroke_width, stroke_color)
     
-    line(x_value, y_value, 'LineWidth', stroke_width, 'Color', stroke_color);
+    line(x, y, 'LineWidth', stroke_width, 'Color', stroke_color);
+
+end
+
+% ~ POLY LINE ~ 
+%{
+    - positionArray: takes array of x and y coordinates
+    - stroke_width: size of stroke
+    - stroke_color: color of stroke
+%}
+function createPolyLine(positionArray, stroke_width, stroke_color)
+
+    drawpolyline("Position", positionArray, "LineWidth", stroke_width, "Color", stroke_color);
+
+end
+
+% ~ Path LINE ~ 
+%{
+    - x: x coordinates (can be an equation)
+    - y: y coordinates (can be an equation)
+    - stroke_width: size of stroke
+    - stroke_color: color of stroke
+%}
+function createPathLine(x, y, stroke_width, stroke_color)
+
+    plot(x, y, 'LineWidth', stroke_width, 'Color', stroke_color);
 
 end
