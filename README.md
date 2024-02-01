@@ -45,3 +45,28 @@ Straight Line
     - y_start: y coordinate (start and end)
     - stroke_width: size of stroke
     - stroke_color: color of stroke
+
+Poly Line
+    - positionArray: takes array of x and y coordinates
+    - stroke_width: size of stroke
+    - stroke_color: color of stroke
+
+Path Line
+    - x: x coordinates (can be an equation)
+    - y: y coordinates (can be an equation)
+    - stroke_width: size of stroke
+    - stroke_color: color of stroke
+
+Translation
+    - shape: assigned shape
+    - x: translate along x axis
+    - y: translate along y axis
+
+Rotation
+    - shape: assigned shape
+    - rot_angle: rotation around the default z-axis
+
+Scaling
+    - shape: assigned shape
+    - x: scale along x axis
+    - y: scale along y axis
