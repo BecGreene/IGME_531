@@ -1,7 +1,6 @@
 
 function assignment_01_toolbox_v3
 
-%{
 for col = 1:20
     for row = 1:20
 
@@ -18,8 +17,9 @@ for col = 1:20
             hold on;
     end
 end
-%}
+%{%}
 
+%{
 for col = 1:15
     for row = 1:10
 
@@ -34,6 +34,7 @@ for col = 1:15
             hold on;
     end
 end
+%}
 
 fig = gcf;
 print(fig,'assignment_01_toolbox_variation_v3.svg','-dsvg');

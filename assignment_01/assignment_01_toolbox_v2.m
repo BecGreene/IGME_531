@@ -1,7 +1,7 @@
 function assignment_01_toolbox_v2
 
 % Recreation of (Des)Orderes
-%{%}
+%{
 for row = 1:10
     for col = 1:10
 
@@ -19,10 +19,10 @@ for row = 1:10
         end
     end
 end
-
+%}
 
 % Variation of (Des)Orderes
-%{
+%{%}
 for row = 1:10
     for col = 1:10
 
@@ -31,7 +31,7 @@ for row = 1:10
 
         for randCount = 1:3
 
-            randNum = random('Normal', 0.1, 0.09);
+            randNum = random('Normal', 0.1, 0.05);
 
             createCircle(row, col, 1-randNum, 1, 'r', false);
             hold on;
@@ -39,10 +39,10 @@ for row = 1:10
         end
     end
 end
-%}
+
 
 fig = gcf;
-print(fig,'assignment_01_toolbox_replication_v2.svg','-dsvg');
+%print(fig,'assignment_01_toolbox_replication_v2.svg','-dsvg');
 
 end
 
