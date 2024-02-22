@@ -1,6 +1,16 @@
 
 function project_01
 
+%{
+createRectangle(0,0,0+1,0+1,0+1,0,0,0,1,'k',false,false,0);
+hold on
+createRectangle(2,2,2+1,2+1,0,0,0,0+1,1,'k',false,false,0);
+hold on
+createRectangle(4,4,4+1,4+1,0+1,0+1,0,0+1,1,'k',false,false,0);
+hold on
+createRectangle(6,6,6+1,6+1,0+1,0,0+1,0+1,1,'k',false,false,0);
+%}
+
 % Variables to change size of completed piece
 num_of_rows = 10;
 num_of_cols = 10;
@@ -8,6 +18,7 @@ num_of_cols = 10;
 % LOOPS
 % Nested for loops to get random triangle shape in grid format
 
+%{
 % Black loop
 for count_1 = 0: (num_of_rows)
     for count_2 = 0: (num_of_cols)
@@ -17,6 +28,8 @@ for count_1 = 0: (num_of_rows)
 
     end
 end
+%}
+
 
 % Blue loop
 for count_1 = 0.25: (num_of_rows + .25)
@@ -27,7 +40,9 @@ for count_1 = 0.25: (num_of_rows + .25)
 
     end
 end
+%{%}
 
+%{
 % Red loop
 for count_1 = 0.5: (num_of_rows + .5)
     for count_2 = 0.5: (num_of_cols + .5)
@@ -37,11 +52,12 @@ for count_1 = 0.5: (num_of_rows + .5)
 
     end
 end
+%}
 
 % Get completed image / svg file
 set(gca,'XTick',[], 'YTick', [],'XColor', 'none', 'YColor', 'none');
 fig = gcf;
-print(fig,'project_01.svg','-dsvg');
+%print(fig,'project_01_blue.svg','-dsvg');
 
 end
 
