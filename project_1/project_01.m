@@ -1,11 +1,79 @@
 
 function project_01
 
-createRectangle(2,2,4,4,1,0,0,1,1,'k',false,false,0);
-createRectangle(2.5,2.5,3.5,3.5,1,0,0,1,1,'k',false,false,0);
+% Variables to change size of completed piece
+num_of_rows = 10;
+num_of_cols = 10;
 
-%fig = gcf;
-%print(fig,'project_01.svg','-dsvg');
+% LOOPS
+% Nested for loops to get random triangle shape in grid format
+
+% Black loop
+for count_1 = 0: (num_of_rows)
+    for count_2 = 0: (num_of_cols)
+
+    getRandomTri(count_1, count_2, 'k');
+    hold on;
+
+    end
+end
+
+% Blue loop
+for count_1 = 0.25: (num_of_rows + .25)
+    for count_2 = 0.25: (num_of_cols + .25)
+
+    getRandomTri(count_1, count_2, 'b');
+    hold on;
+
+    end
+end
+
+% Red loop
+for count_1 = 0.5: (num_of_rows + .5)
+    for count_2 = 0.5: (num_of_cols + .5)
+
+    getRandomTri(count_1, count_2, 'r');
+    hold on;
+
+    end
+end
+
+% Get completed image / svg file
+set(gca,'XTick',[], 'YTick', [],'XColor', 'none', 'YColor', 'none');
+fig = gcf;
+print(fig,'project_01.svg','-dsvg');
+
+end
+
+% ~ RANDOM TRIANGLE FUNCTION ~
+%{
+    - x: x-starting point
+    - y: y-starting point
+    - color: color of lines
+%}
+function getRandomTri(x,y, color)
+
+% Random number generator for values between 1-4    
+randNum = randi([1 4],1,1);
+
+% Based on random number, assign associated triangle and plot it
+switch randNum
+    case 1
+        disp('rect1');
+        createRectangle(x,x,x+1,x+1,y+1,y,y,y,1,color,false,false,0);
+    case 2
+        disp('rect2');
+        createRectangle(x,x,x+1,x+1,y,y,y,y+1,1,color,false,false,0);
+    case 3
+        disp('rect3');
+        createRectangle(x,x,x+1,x+1,y+1,y+1,y,y+1,1,color,false,false,0);
+    case 4
+        disp('rect4');
+        createRectangle(x,x,x+1,x+1,y+1,y,y+1,y+1,1,color,false,false,0);
+    otherwise
+        disp('not a valid num');
+        disp(randNum);
+end
 
 end
 
